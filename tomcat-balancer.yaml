@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    run: tomcat-demo
+  name: tomcat-balancer
+  selfLink: /api/v1/namespaces/default/services/tomcat-balancer
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31191
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    run: tomcat-demo
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer: {}

@@ -8,13 +8,15 @@ metadata:
 spec:
   externalTrafficPolicy: Cluster
   ports:
-  - nodePort: 80
-    port: 8080
+  - port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
     run: tomcat-demo
-  sessionAffinity: None
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 2
   type: LoadBalancer
 status:
   loadBalancer: {}

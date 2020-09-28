@@ -5,18 +5,16 @@ metadata:
   labels:
     run: tomcat-demo
   name: tomcat-balancer
+  namespace: tomcat-demo
 spec:
-  externalTrafficPolicy: Cluster
   ports:
-  - port: 8080
+  - nodePort: 30666
+    port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
     run: tomcat-demo
-  sessionAffinity: ClientIP
-  sessionAffinityConfig:
-    clientIP:
-      timeoutSeconds: 2
+  sessionAffinity: None
   type: LoadBalancer
 status:
   loadBalancer: {}
